@@ -1,13 +1,15 @@
-
 # Beat tracking example
 from __future__ import print_function
 import librosa
 from datetime import datetime
+import os
 
+path = os.path.join(os.path.dirname(__file__), os.pardir,
+                        "resources/lisa3.wav")
 a = datetime.now()
 
 # 1. Get the file path to the included audio example
-filename = librosa.util.example_audio_file()
+filename =  path
 
 b = datetime.now()
 print("get file path", b-a)
@@ -35,3 +37,7 @@ librosa.output.times_csv('beat_times.csv', beat_times)
 
 e = datetime.now()
 print("convert the frame indicies of beat events into timestamps", e-d)
+
+print(librosa.util.example_audio_file())
+
+print("total time", e-a)
