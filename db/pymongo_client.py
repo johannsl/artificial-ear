@@ -22,8 +22,19 @@ def insertOne(songname, length, bpm, key):
         )
     return result
 
-def findSongsByKey(key):
-    songs = mc.find({"Key": key})
+def updateOne(songname, attribute, value):
+    result = mc.update_one(
+        {"Name": songname},
+        {
+            "$set": {
+                attribute: value
+                }
+            }
+        )
+    return result
+
+def findSongsByAttribute(attribute, value):
+    songs = mc.find({attribute: value})
     for song in songs:
         print(song.get("Name"))
 
@@ -39,7 +50,9 @@ insertOne("hjhka", 135, 120, "C")
 insertOne("asfasda", 155, 150, "A")
 insertOne("posoo", 185, 90, "G")
 
-findSongsByKey("G")
+updateOne("posoo", "Key", "F")
+
+findSongsByAttribute("Key", "F")
 
 mc.remove()
 
