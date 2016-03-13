@@ -6,7 +6,7 @@ import os
 import numpy as np
 
 path = os.path.join(os.path.dirname(__file__), os.pardir,
-                        "resources/lisa2.wav")
+                        "resources/01.wav")
 a = datetime.now()
 
 # 1. Get the file path to the included audio example
