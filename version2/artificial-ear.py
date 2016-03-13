@@ -59,4 +59,3 @@ tone = tone_list[index]
 b = datetime.now() - a
 print(tone)
 print(b)
-

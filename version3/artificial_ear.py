@@ -1,6 +1,7 @@
 import librosa
 import logging
 import logging.config
+from datetime import datetime
 import math
 from numpy import conj
 from numpy import fft
@@ -8,6 +9,8 @@ from utils import config
 import os
 
 def main():
+    start_time = datetime.now()
+
     # Logging
     logging.config.dictConfig(config.LOG_CONFIG)
     log = logging.getLogger(__name__)
@@ -32,6 +35,8 @@ def main():
             note = find_note(freq)
             note_list[note] += power[i]
     log.info(note_list)
+
+    print(datetime.now() - start_time)
 
 def find_note(freq):
     c0 = 16.352
