@@ -11,16 +11,17 @@ def disconnect():
     client.close()
 
 def insertOne(songname, length, bpm, key):
+    deleteOne(songname)
     result = mc.insert_one(
         {"Name": songname,
          "Length": length,
          "Tempo": bpm,
-         "Key": key
+         "Key": key,
          }
         )
     return result
 
-def updateOne(songname, attribute, value):
+def updateAttribute(songname, attribute, value):
     result = mc.update_one(
         {"Name": songname},
         {
@@ -48,10 +49,11 @@ connect_local()
     
 insertOne("hksdhas", 140, 120, "C")
 insertOne("hjhka", 135, 120, "C")
+insertOne("hjhka", 135, 120, "C")
 insertOne("asfasda", 155, 150, "A")
 insertOne("posoo", 185, 90, "G")
 
-updateOne("posoo", "Key", "F")
+updateAttribute("posoo", "Key", "F")
 deleteOne("hksdhas")
 
 findAllSongs()
