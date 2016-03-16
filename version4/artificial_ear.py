@@ -3,6 +3,7 @@ import logging
 import logging.config
 from datetime import datetime
 import math
+import numpy
 from utils import config
 from utils import key
 from utils import note
@@ -22,6 +23,15 @@ def main():
     path = os.path.join(os.path.dirname(__file__), os.pardir, "resources/01.wav")
                         #"resources/SineWave_440Hz.wav")
     signal, samplerate = librosa.load(path)
+    log.info(datetime.now() - start_time)
+    
+    # Find BPM
+    log.info("Finding BPM")
+    onset_env = librosa.onset.onset_strength(signal, sr=samplerate, 
+                                                aggregate=numpy.median)
+    tempo, beats = librosa.beat.beat_track(onset_envelope=onset_env, 
+                                                sr=samplerate)
+    log.info("{:.2f}".format(tempo))
     log.info(datetime.now() - start_time)
      
     # Find list of notes
