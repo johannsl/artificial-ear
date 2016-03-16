@@ -23,7 +23,7 @@ minor_mean = 3.7092
 durations = input("12 durations: ").split(",")
 a = datetime.now()
 for i in range(len(durations)):
-    durations[i] = int(durations[i])
+    durations[i] = int(float(durations[i]))
 
 # Mean of input
 durations_mean = 0

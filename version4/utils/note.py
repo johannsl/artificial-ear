@@ -20,7 +20,7 @@ def generate_note_list(signal, samplerate):
     factor = samplerate / float(signal_len)
     for signal_step in range(-signal_len/2, signal_len/2):
         frequency_range.append(abs(signal_step * factor))
-    
+
     frequency = fft.fft(signal, signal_len)
     frequency = fft.fftshift(frequency)
     for value in frequency:

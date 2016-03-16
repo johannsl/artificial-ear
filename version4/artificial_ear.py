@@ -20,7 +20,7 @@ def main():
 
     # Load
     log.info("Loading song")
-    path = os.path.join(os.path.dirname(__file__), os.pardir, "resources/01.wav")
+    path = os.path.join(os.path.dirname(__file__), os.pardir, "resources/Lisa gikk til skolen.wav")
                         #"resources/SineWave_440Hz.wav")
     signal, samplerate = librosa.load(path)
     log.info(datetime.now() - start_time)

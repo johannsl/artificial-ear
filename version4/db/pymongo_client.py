@@ -3,7 +3,7 @@ from pymongo import MongoClient
 
 def connect_local():
     global mc
-    client = MongoClient("localhost", 27017)
+    client = MongoClient("129.241.228.82", 27017)
     db = client.music
     mc = db.music_collection
 
