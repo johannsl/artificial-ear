@@ -2,8 +2,6 @@ from pymongo import MongoClient
     
 
 def connect_local():
-    global db
-    global client
     global mc
     client = MongoClient("localhost", 27017)
     db = client.music
@@ -33,6 +31,9 @@ def updateOne(songname, attribute, value):
         )
     return result
 
+def deleteOne(songname):
+    result = mc.remove({"Name": songname})
+
 def findSongsByAttribute(attribute, value):
     songs = mc.find({attribute: value})
     for song in songs:
@@ -51,9 +52,12 @@ insertOne("asfasda", 155, 150, "A")
 insertOne("posoo", 185, 90, "G")
 
 updateOne("posoo", "Key", "F")
+deleteOne("hksdhas")
 
-findSongsByAttribute("Key", "F")
+findAllSongs()
 
 mc.remove()
+
+
 
 
