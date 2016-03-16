@@ -3,17 +3,17 @@ from pymongo import MongoClient
 
 def connect_local():
     global mc
-    client = MongoClient("localhost", 27017)
+    client = MongoClient('10.22.114.4', 27017)
     db = client.music
     mc = db.music_collection
 
 def disconnect():
     client.close()
 
-def insertOne(songname, length, bpm, key):
-    deleteOne(songname)
+def insertOne(title, length, bpm, key):
+    deleteOne(title)
     result = mc.insert_one(
-        {"Name": songname,
+        {"Title": title,
          "Length": length,
          "Tempo": bpm,
          "Key": key,
@@ -21,9 +21,9 @@ def insertOne(songname, length, bpm, key):
         )
     return result
 
-def updateAttribute(songname, attribute, value):
+def updateAttribute(title, attribute, value):
     result = mc.update_one(
-        {"Name": songname},
+        {"Name": title},
         {
             "$set": {
                 attribute: value
@@ -32,33 +32,22 @@ def updateAttribute(songname, attribute, value):
         )
     return result
 
-def deleteOne(songname):
-    result = mc.remove({"Name": songname})
+def deleteOne(title):
+    result = mc.remove({"Title": title})
 
 def findSongsByAttribute(attribute, value):
     songs = mc.find({attribute: value})
     for song in songs:
-        print(song.get("Name"))
+        print(song.get("Title"))
 
 def findAllSongs():
     songs = mc.find()
     for song in songs:
-        print(song.get("Name"))
+        tempo = str (song.get("Tempo"))
+        print('title:' + song.get("Title") + ', tempo:' + tempo + ', key:' + song.get("Key"))
 
-connect_local()
-    
-insertOne("hksdhas", 140, 120, "C")
-insertOne("hjhka", 135, 120, "C")
-insertOne("hjhka", 135, 120, "C")
-insertOne("asfasda", 155, 150, "A")
-insertOne("posoo", 185, 90, "G")
 
-updateAttribute("posoo", "Key", "F")
-deleteOne("hksdhas")
 
-findAllSongs()
-
-mc.remove()
 
 
 

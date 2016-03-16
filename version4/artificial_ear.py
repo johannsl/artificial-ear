@@ -7,6 +7,7 @@ import numpy
 from utils import config
 from utils import key
 from utils import note
+from db import pymongo_client
 import os
 
 def main():
@@ -43,6 +44,13 @@ def main():
     log.info("Finding the music key")
     music_key = key.generate_key(note_list)
     log.info(datetime.now() - start_time)
+
+    # Connect to the database
+    pymongo_client.connect_local()
+
+    # Write song to the database
+    pymongo_client.insertOne(path, None, tempo, music_key)
+    pymongo_client.findAllSongs()
 
 if __name__ == "__main__":
     print("Project artificial ear")
